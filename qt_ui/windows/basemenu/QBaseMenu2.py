@@ -89,3 +89,10 @@ class QBaseMenu2(QDialog):
             return "./resources/ui/lha.png"
         else:
             return "./resources/ui/airbase.png"
+
+    def update_dialogue_budget(self, budget):
+        GameUpdateSignal.get_instance().updateBudget(self.game_model.game)
+        for child in self.children():
+            if child.objectName() == "budgetField":
+                child.setText(
+                    QRecruitBehaviour.BUDGET_FORMAT.format(budget))
